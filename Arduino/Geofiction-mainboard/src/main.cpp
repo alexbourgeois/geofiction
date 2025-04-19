@@ -36,7 +36,7 @@ const int countsPerRevolution = 1600; // 400 PPR x 4 transitions en quadrature
 // Table RPM computation
 unsigned long lastTime = 0;
 float rpm = 0.0;
-const unsigned long samplingInterval = 125; // Intervalle d'échantillonnage vitesse en ms
+const unsigned long samplingInterval = 250; // Intervalle d'échantillonnage vitesse en ms
 
 volatile bool mustADSReadData = false;
 
@@ -73,15 +73,21 @@ void ComputeTableSpeed() {
 
       switch (encoded) {
         case 0b0001:
+        pulseCount++;
         case 0b0111:
+        pulseCount++;
         case 0b1110:
+        pulseCount++;
         case 0b1000:
           direction = 1; // Sens horaire
           pulseCount++;
           break;
         case 0b0010:
+        pulseCount++;
         case 0b0100:
+        pulseCount++;
         case 0b1101:
+        pulseCount++;
         case 0b1011:
           direction = -1; // Sens antihoraire
           pulseCount++;
